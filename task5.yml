@@ -1,0 +1,5 @@
+- name: Gather Windows Information 
+  hosts: windows
+  tasks:
+    - debug: var=vars
+    - debug: var=ansible_os_name

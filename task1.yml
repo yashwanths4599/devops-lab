@@ -1,0 +1,21 @@
+
+- hosts: slave
+  become: sudo
+  tasks:
+  - name: ansible add user
+    user:
+      name: user1
+      password: admin@123@123
+- hosts: slave
+  tasks:
+  - name: Ansible create file
+    file:
+      path: "/sample.txt"
+      state: touch
+- hosts: slave
+  tasks:
+  - name: Ansible adding content
+    lineinfile:
+      path: "/sample.txt"
+      line: 'welcome to Capgemini'
+

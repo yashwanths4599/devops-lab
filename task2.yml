@@ -1,0 +1,9 @@
+
+- hosts: slave
+  tasks:
+  - name: change password of user1 
+    user:
+      name: new_user
+      update_password: always
+      password: redhat
+

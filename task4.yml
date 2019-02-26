@@ -1,0 +1,22 @@
+- name: Update package if already installed 
+  hosts: slave
+  sudo: yes
+  tasks:
+    - name: Check if Package is installed
+      shell: dpkg-query -W -f='${Status}' httpd | grep 'install ok installed'
+      register: is_installed
+      failed_when: no
+      changed_when: no
+
+    - name: Update Package only if installed
+      apt:
+        name: httpd
+        state: latest
+        update_cache: yes
+      when: is_installed.rc == 0
+
+    - name: Install package if not installed
+      yum:
+        name: httpd
+        state: present
+      when: is_installed.rc == 1
