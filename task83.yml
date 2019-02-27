@@ -1,0 +1,7 @@
+- hosts: root@10.0.0.5
+  tasks:
+  - name: Restart server
+    command: /sbin/shutdown -r +1
+    async: 0
+    poll: 0
+    ignore_errors: true
