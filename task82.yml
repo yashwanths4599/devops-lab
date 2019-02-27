@@ -1,0 +1,6 @@
+- hosts: root@10.0.0.5
+  tasks:
+  - name: Install package
+    yum:
+      name: git
+      state: present
