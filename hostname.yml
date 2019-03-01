@@ -1,0 +1,11 @@
+#- hosts: slave
+#  tasks:
+#  - hostname:
+#     name="web01"
+---
+- hosts: slave
+  vars:
+     contents: "{{ lookup('file', '/root/hostname') }}"
+  tasks:
+     - command: hostname {{ contents }}
+
