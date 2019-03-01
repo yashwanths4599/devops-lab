@@ -9,17 +9,21 @@ class HomePageView(View):
     def get(self, request, **kwargs):
         return render(request, 'home.html', context=None)
 def my_view1(request):
-        if request.method == 'GET':
-          import os
-          cmd = 'ansible-playbook /root/hostname.yml'
-          os.system(cmd)
- 
+	hostname= request.GET.get('hostname')
+	f = open( '/root/hostname', 'w+' )
+        f.write( hostname )
+        f.close()
+        import os
+        cmd = 'ansible-playbook /root/hostname.yml'
+        os.system(cmd)
         return HttpResponse('Hostname changed')
 
 def my_view2(request):
-        if request.method == 'GET':
-          import os
-          cmd = 'ansible-playbook /root/install.yml'
-          os.system(cmd)
-
+	package = request.GET.get('install')
+        f = open( '/root/indata', 'w+' )
+        f.write( package )
+        f.close()
+        import os
+        cmd = 'ansible-playbook /root/install.yml'
+        os.system(cmd)
         return HttpResponse('Package Installed')
